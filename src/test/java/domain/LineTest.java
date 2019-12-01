@@ -45,4 +45,14 @@ class LineTest {
                 () -> line.move(5)
         ).isExactlyInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("오른쪽으로 움직일 수 있는지 여부를 잘 판단하는지 확인한다.")
+    void isMovableToRightTest() {
+        Line line = new Line(directions);
+
+        assertThat(line.isMovableToRight(0)).isEqualTo(true);
+        assertThat(line.isMovableToRight(1)).isEqualTo(false);
+        assertThat(line.isMovableToRight(2)).isEqualTo(false);
+    }
 }

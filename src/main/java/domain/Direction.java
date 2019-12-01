@@ -1,5 +1,7 @@
 package domain;
 
+import utils.BooleanGenerator;
+
 public enum Direction {
     LEFT(true, false),
     RIGHT(false, true),
@@ -11,6 +13,27 @@ public enum Direction {
     Direction(boolean left, boolean right) {
         this.left = left;
         this.right = right;
+    }
+
+    public static Direction getFirstDirection(BooleanGenerator booleanGenerator) {
+        if (booleanGenerator.generate()) {
+            return RIGHT;
+        }
+        return NONE;
+    }
+
+    public Direction getNextDirection(BooleanGenerator booleanGenerator) {
+        if (this.right) {
+            return LEFT;
+        }
+        return getFirstDirection(booleanGenerator);
+    }
+
+    public Direction getLastDirection() {
+        if (this.right) {
+            return LEFT;
+        }
+        return NONE;
     }
 
     public int move(int position) {
